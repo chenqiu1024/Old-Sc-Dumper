@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import re
 import os
 import sys
 import lzma
@@ -144,7 +145,9 @@ def read_texture(Reader, filename, picCount):
             pixels.append(convert_pixel(Reader.read(pixelSize), PixelType))
 
     img.putdata(pixels)
-    img.save(filename.split('.')[0] + ('_' * picCount) + '.png', 'PNG')
+    print(re.sub(r".+\/([^\/]*)\.sc$", r"\1", filename) + ('_' * picCount) + '.png')
+    img.save(re.sub(r".+\/([^\/]*)\.sc$", r"\1", filename) + ('_' * picCount) + '.png', 'PNG')
+##    img.save(filename.split('.')[0] + ('_' * picCount) + '.png', 'PNG')
 
 
 if __name__ == '__main__':
